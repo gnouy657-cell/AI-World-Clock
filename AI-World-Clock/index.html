@@ -10,41 +10,65 @@
     <title>AI World Clock</title>
   </head>
   <body>
-    <div class="Frame">
-      <h1>WORLD CLOCK</h1>
-      <select id="city">
-        <option value="">Choose a City....</option>
-        <option value="America/Detroit 🌳">My current location</option>
-        <option value="Australia/Sydney">Sydney</option>
-        <option value="Asia/Vientiane">Vientiane</option>
-        <option value="America/New_York">New York</option>
-      </select>
+    <main class="Frame">
+      <header class="header">
+        <div>
+          <h1>🌎 WORLD CLOCK</h1>
+          <p class="subtitle">
+            <em>Time around the world, at a glance</em>
+          </p>
+        </div>
+        <button
+          id="themeToggle"
+          class="theme-toggle"
+          aria-label="Toggle dark mode"
+        >
+          🌙
+        </button>
+      </header>
+      <section class="controls">
+        <select id="city">
+          <option value="" selected disabled>Choose a City....</option>
+          <option value="current">📍My current location</option>
+          <option value="Australia/Sydney">Sydney</option>
+          <option value="Asia/Vientiane">Vientiane</option>
+          <option value="America/New_York">New York</option>
+          <option value="America/Chicago">Chicago</option>
+        </select>
+      </section>
 
-      <div id="world">
-        <div class="cities" id="detroit">
-          <div>
+      <section id="world">
+        <div class="cities" id="America/Detroit">
+          <div class="city-info">
             <h2>Detroit 🚗</h2>
+            <div class="timezone">America</div>
             <div class="date1"></div>
+            <div class="difference">Local time</div>
           </div>
           <div class="time1"></div>
         </div>
-        <div class="cities" id="london">
-          <div>
+
+        <div class="cities" id="Europe/London">
+          <div class="city-info">
             <h2>London 🎡</h2>
+            <div class="timezone">Europe</div>
             <div class="date1"></div>
+            <div class="difference"></div>
           </div>
           <div class="time1"></div>
         </div>
-        <div class="cities" id="bangkok">
-          <div>
+
+        <div class="cities" id="Asia/Bangkok">
+          <div class="city-info">
             <h2>Bangkok 🐘</h2>
+            <div class="timezone">Asia</div>
             <div class="date1"></div>
+            <div class="difference"></div>
           </div>
           <div class="time1"></div>
         </div>
-        </div>
-      </div>
-    </div>
+      </section>
+    </main>
 
     <footer>
       This project was coded by

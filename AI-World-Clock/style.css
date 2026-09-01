@@ -1,6 +1,67 @@
 body {
   background-color: rgb(205, 239, 205);
   font-family: Arial, sans-serif;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+body.dark {
+  --background: #202a20;
+  --card: #2c382c;
+  --card-hover: #344234;
+  --text: #f1f1f1;
+  --secondary: #c1c9c1;
+  --border: #465646;
+  --input: #354135;
+  --shadow: rgba(0, 0, 0, 0.25);
+
+  background-color: var(--background);
+  color: var(--text);
+}
+
+body.dark .Frame {
+  background-color: var(--card);
+  box-shadow: 10px 20px 20px var(--shadow);
+}
+
+body.dark .subtitle,
+body.dark .timezone,
+body.dark .date1,
+body.dark footer {
+  color: var(--secondary);
+}
+
+body.dark select,
+body.dark .theme-toggle,
+body.dark .back-link {
+  background-color: var(--input);
+  color: var(--text);
+  border-color: var(--border);
+}
+
+body.dark .cities {
+  background-color: var(--card);
+  border-color: var(--border);
+}
+
+body.dark .city-info h2,
+body.dark .time1 {
+  color: var(--text);
+}
+
+body.dark .cities:hover,
+body.dark .back-link:hover {
+  background-color: var(--card-hover);
+}
+
+body.dark footer,
+body.dark footer a {
+  color: #b8d6b8;
+}
+
+body.dark footer a:hover {
+  color: #d5ead5;
 }
 
 h1 {
@@ -15,6 +76,46 @@ h2 {
   margin: 0 0 5px;
 }
 
+.header {
+  position: relative;
+}
+
+.header > div {
+  text-align: center;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 18px;
+  font-style: italic;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.theme-toggle {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-50%) rotate(15deg) scale(1.05);
+}
+
+.controls {
+  margin-bottom: 25px;
+}
+
 select {
   padding: 10px;
   border: 1px solid #ccc;
@@ -25,37 +126,61 @@ select {
   font-size: 16px;
 }
 
+#world {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .Frame {
   max-width: 600px;
   background: white;
   padding: 60px;
-  margin: 60px auto;
+  margin: 60px auto 30px;
   box-shadow: 10px 20px 20px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .cities {
+  background: #f8fff8;
+  border-radius: 15px;
+  margin: 0;
+  padding: 20px;
+  border: 1px solid #e5eee5;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
   display: flex;
   justify-content: space-between;
-  margin: 20px;
-  border-bottom: 1px dashed #ccc;
-  padding: 20px;
+  align-items: center;
 }
 
-.cities:last-child {
-  border-bottom: none;
+.cities:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
 }
 
-.time1 {
-  font-size: 30px;
-  font-weight: bold;
+.city-info h2 {
+  margin: 0;
+  font-size: 22px;
   color: #333;
 }
 
+.time1 {
+  font-size: 32px;
+  font-weight: bold;
+  color: #333;
+  white-space: nowrap;
+}
+
 .time1 small {
-  font-size: 10px;
+  font-size: 12px;
   vertical-align: middle;
   line-height: 60px;
+  font-weight: normal;
 }
 
 .date1 {
@@ -66,12 +191,73 @@ select {
 
 footer {
   text-align: center;
-  margin-top: 20px;
-  font-size: 20px;
+  margin-top: 0;
+  margin-bottom: 30px;
+  font-size: 15px;
   color: rgba(0, 0, 0, 0.6);
 }
 
 .back-link {
   display: block;
+  margin: 22px auto 0;
+  padding: 8px 16px;
+  font-size: 16px;
   text-align: center;
+  border: none;
+  border-radius: 8px;
+  background-color: #f8fff8;
+  color: #333;
+  cursor: pointer;
+}
+
+.back-link:hover {
+  background-color: #e5eee5;
+}
+
+@media (max-width: 600px) {
+  .Frame {
+    width: 90%;
+    padding: 30px 20px;
+    margin: 30px auto 20px;
+  }
+
+  h1 {
+    font-size: 30px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+  }
+
+  .theme-toggle {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    right: 5px;
+  }
+
+  .cities {
+    padding: 15px;
+  }
+
+  .city-info h2 {
+    font-size: 20px;
+  }
+
+  .date1 {
+    font-size: 16px;
+  }
+
+  .time1 {
+    font-size: 26px;
+  }
+
+  .time1 small {
+    font-size: 11px;
+  }
+
+  footer {
+    font-size: 14px;
+    padding: 0 15px;
+  }
 }
