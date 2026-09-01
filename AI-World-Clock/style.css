@@ -26,7 +26,7 @@ select {
 }
 
 .Frame {
-  max-width: 500px;
+  max-width: 600px;
   background: white;
   padding: 60px;
   margin: 60px auto;
