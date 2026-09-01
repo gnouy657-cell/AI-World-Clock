@@ -1,5 +1,15 @@
 body {
-  background-color: rgb(205, 239, 205);
+  --background: rgb(205, 239, 205);
+  --card: white;
+  --card-hover: #e5eee5;
+  --text: #333;
+  --secondary: #666;
+  --border: #e5eee5;
+  --input: white;
+  --shadow: rgba(0, 0, 0, 0.1);
+
+  background-color: var(--background);
+  color: var(--text);
   font-family: Arial, sans-serif;
   transition:
     background-color 0.3s ease,
@@ -15,59 +25,13 @@ body.dark {
   --border: #465646;
   --input: #354135;
   --shadow: rgba(0, 0, 0, 0.25);
-
-  background-color: var(--background);
-  color: var(--text);
 }
 
-body.dark .Frame {
-  background-color: var(--card);
-  box-shadow: 10px 20px 20px var(--shadow);
-}
-
-body.dark .subtitle,
-body.dark .timezone,
-body.dark .date1,
-body.dark footer {
-  color: var(--secondary);
-}
-
-body.dark select,
-body.dark .theme-toggle,
-body.dark .back-link {
-  background-color: var(--input);
-  color: var(--text);
-  border-color: var(--border);
-}
-
-body.dark .cities {
-  background-color: var(--card);
-  border-color: var(--border);
-}
-
-body.dark .city-info h2,
-body.dark .time1 {
-  color: var(--text);
-}
-
-body.dark .cities:hover,
-body.dark .back-link:hover {
-  background-color: var(--card-hover);
-}
-
-body.dark footer,
-body.dark footer a {
-  color: #b8d6b8;
-}
-
-body.dark footer a:hover {
-  color: #d5ead5;
-}
+/* Header */
 
 h1 {
   text-align: center;
   font-size: 40px;
-  font-family: Arial, sans-serif;
   margin-bottom: 10px;
 }
 
@@ -88,7 +52,7 @@ h2 {
   text-align: center;
   font-size: 18px;
   font-style: italic;
-  color: #666;
+  color: var(--secondary);
   margin-bottom: 20px;
 }
 
@@ -103,6 +67,8 @@ h2 {
   border-radius: 50%;
   font-size: 20px;
   cursor: pointer;
+  background-color: var(--input);
+  color: var(--text);
   transition:
     transform 0.2s ease,
     background-color 0.2s ease;
@@ -112,19 +78,38 @@ h2 {
   transform: translateY(-50%) rotate(15deg) scale(1.05);
 }
 
+/* City selector */
+
 .controls {
   margin-bottom: 25px;
 }
 
 select {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background: white;
   display: block;
   width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  background-color: var(--input);
+  color: var(--text);
   font-size: 16px;
 }
+
+/* Main frame */
+
+.Frame {
+  max-width: 600px;
+  margin: 60px auto 30px;
+  padding: 60px;
+  background-color: var(--card);
+  box-shadow: 10px 20px 20px var(--shadow);
+  border-radius: 20px;
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* Cities */
 
 #world {
   display: flex;
@@ -132,47 +117,47 @@ select {
   gap: 10px;
 }
 
-.Frame {
-  max-width: 600px;
-  background: white;
-  padding: 60px;
-  margin: 60px auto 30px;
-  box-shadow: 10px 20px 20px rgba(0, 0, 0, 0.1);
-  border-radius: 20px;
-  transition:
-    background-color 0.3s ease,
-    box-shadow 0.3s ease;
-}
-
 .cities {
-  background: #f8fff8;
-  border-radius: 15px;
-  margin: 0;
-  padding: 20px;
-  border: 1px solid #e5eee5;
-  transition:
-    transform 0.2s,
-    box-shadow 0.2s;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 0;
+  padding: 20px;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s,
+    background-color 0.2s;
 }
 
 .cities:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 5px 15px var(--shadow);
+  background-color: var(--card-hover);
 }
 
 .city-info h2 {
   margin: 0;
   font-size: 22px;
-  color: #333;
+  color: var(--text);
+}
+
+.timezone,
+.date1 {
+  color: var(--secondary);
+}
+
+.date1 {
+  font-size: 18px;
+  opacity: 0.8;
 }
 
 .time1 {
   font-size: 32px;
   font-weight: bold;
-  color: #333;
+  color: var(--text);
   white-space: nowrap;
 }
 
@@ -183,19 +168,7 @@ select {
   font-weight: normal;
 }
 
-.date1 {
-  font-size: 18px;
-  color: #666;
-  opacity: 0.8;
-}
-
-footer {
-  text-align: center;
-  margin-top: 0;
-  margin-bottom: 30px;
-  font-size: 15px;
-  color: rgba(0, 0, 0, 0.6);
-}
+/* Back button */
 
 .back-link {
   display: block;
@@ -203,16 +176,36 @@ footer {
   padding: 8px 16px;
   font-size: 16px;
   text-align: center;
-  border: none;
+  border: 1px solid var(--border);
   border-radius: 8px;
-  background-color: #f8fff8;
-  color: #333;
+  background-color: var(--input);
+  color: var(--text);
   cursor: pointer;
 }
 
 .back-link:hover {
-  background-color: #e5eee5;
+  background-color: var(--card-hover);
 }
+
+/* Footer */
+
+footer {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 30px;
+  font-size: 15px;
+  color: var(--secondary);
+}
+
+footer a {
+  color: inherit;
+}
+
+footer a:hover {
+  color: #d5ead5;
+}
+
+/* Mobile */
 
 @media (max-width: 600px) {
   .Frame {
@@ -232,9 +225,9 @@ footer {
   .theme-toggle {
     width: 40px;
     height: 40px;
-    font-size: 18px;
     right: -5px;
     top: 55%;
+    font-size: 18px;
   }
 
   .cities {
@@ -258,7 +251,7 @@ footer {
   }
 
   footer {
-    font-size: 14px;
     padding: 0 15px;
+    font-size: 14px;
   }
 }
