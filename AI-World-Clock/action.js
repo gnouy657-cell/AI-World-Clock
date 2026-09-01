@@ -51,11 +51,16 @@ function updateCity(event) {
   }
 
   let cityName = cityTimeZone.replace("_", " ").split("/")[1];
+
+  if (cityTimeZone === "Australia/Sydney") cityName = "Sydney 🦘";
+  if (cityTimeZone === "Asia/Vientiane") cityName = "Vientiane 🙏";
+  if (cityTimeZone === "America/New_York") cityName = "New York 🗽";
+  if (cityTimeZone === "America/Detroit") cityName = "Lansing 🌳";
   let cityTime = moment().tz(cityTimeZone);
   let citiesElement = document.querySelector("#world");
 
   citiesElement.innerHTML = `
-    <div class="cities" id="${cityTimeZone}">
+  <div class="cities" id="${cityTimeZone}">
       <div>
         <h2>${cityName}</h2>
         <div class="date1">${cityTime.format("MMMM Do YYYY")}</div>
