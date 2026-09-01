@@ -6,7 +6,7 @@ function updateTime() {
     let detroitTime = moment().tz("America/Detroit");
 
     detroitDate1Element.innerHTML = detroitTime.format("MMMM Do YYYY");
-    detroitTime1Element.innerHTML = `${detroitTime.format("h:mm:ss:SSS")}<small> ${detroitTime.format("A")} </small>`;
+    detroitTime1Element.innerHTML = `${detroitTime.format("h:mm:ss")}<small> ${detroitTime.format("A")} </small>`;
   }
 
   let bangkokElement = document.querySelector("#bangkok");
@@ -16,15 +16,40 @@ function updateTime() {
     let bangkokTime = moment().tz("Asia/Bangkok");
 
     bangkokDate1Element.innerHTML = bangkokTime.format("MMMM Do YYYY");
-    bangkokTime1Element.innerHTML = `${bangkokTime.format("h:mm:ss:SSS")}<small> ${bangkokTime.format("A")} </small>`;
+    bangkokTime1Element.innerHTML = `${bangkokTime.format("h:mm:ss")}<small> ${bangkokTime.format("A")} </small>`;
+  }
+
+  let londonElement = document.querySelector("#london");
+  if (londonElement) {
+    let londonDate1Element = londonElement.querySelector(".date1");
+    let londonTime1Element = londonElement.querySelector(".time1");
+    let londonTime = moment().tz("Europe/London");
+
+    londonDate1Element.innerHTML = londonTime.format("MMMM Do YYYY");
+    londonTime1Element.innerHTML = `${londonTime.format("h:mm:ss")}<small> ${londonTime.format("A")} </small>`;
+  }
+
+  // Update selected city
+  let selectedCityElement = document.querySelector("#world .cities");
+
+  if (selectedCityElement) {
+    let timeZone = selectedCityElement.id;
+    let selectedDateElement = selectedCityElement.querySelector(".date1");
+    let selectedTimeElement = selectedCityElement.querySelector(".time1");
+    let selectedTime = moment().tz(timeZone);
+
+    selectedDateElement.innerHTML = selectedTime.format("MMMM Do YYYY");
+    selectedTimeElement.innerHTML = `${selectedTime.format("h:mm:ss")}<small> ${selectedTime.format("A")} </small>`;
   }
 }
 
 function updateCity(event) {
   let cityTimeZone = event.target.value;
+
   if (cityTimeZone === "current 🌳") {
     cityTimeZone = moment.tz.guess();
   }
+
   let cityName = cityTimeZone.replace("_", " ").split("/")[1];
   let cityTime = moment().tz(cityTimeZone);
   let citiesElement = document.querySelector("#world");
@@ -35,17 +60,19 @@ function updateCity(event) {
         <h2>${cityName}</h2>
         <div class="date1">${cityTime.format("MMMM Do YYYY")}</div>
       </div>
+
       <div class="time1">
-        ${cityTime.format("h:mm:ss:SSS")}
+        ${cityTime.format("h:mm:ss")}
         <small>${cityTime.format("A")}</small>
       </div>
     </div>
-    <a href="/"> Back to all cities</a>
+
+    <a href="/" class="back-link">Back to all cities</a>
   `;
 }
 
 updateTime();
-setInterval(updateTime, 1);
+setInterval(updateTime, 1000);
 
 let citySelectElement = document.querySelector("#city");
 
